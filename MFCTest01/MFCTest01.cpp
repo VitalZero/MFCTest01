@@ -23,6 +23,7 @@ protected:
 private:
 	CEdit* edit = nullptr;
 	CButton* button = nullptr;
+	CFont font;
 };
 
 class MFCTest : public CWinApp
@@ -54,23 +55,23 @@ int MainFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 
 		edit = new CEdit();
 		edit->Create( WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_NOHIDESEL,
-			CRect( 10, 10, 75, 50 ), this, 1001 );
+			CRect( 10, 10, 110, 34 ), this, 1001 );
 		edit->SetFocus();
 
 		button = new CButton();
 		button->Create( L"Aceptar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
-			CRect( 10, 70, 75, 94 ), this, 1002 );
+			CRect( 10, 70, 75, 93 ), this, 1002 );
 
-		//// Get the system message box font
-		//NONCLIENTMETRICS ncm;
-		//ncm.cbSize = sizeof( ncm );
-		//SystemParametersInfo( SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0 );
-		//LOGFONT lfDlgFont = ncm.lfMessageFont;
-		//CFont font;
-		//font.CreateFontIndirect( &lfDlgFont );
+		// Get the system message box font
+		NONCLIENTMETRICS ncm;
+		ncm.cbSize = sizeof( ncm );
+		SystemParametersInfo( SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0 );
+		LOGFONT lfDlgFont = ncm.lfMessageFont;
+		
+		font.CreateFontIndirect( &lfDlgFont );
 
-		//edit->SetFont( &font );
-		//button->SetFont( &font );
+		edit->SetFont( &font );
+		button->SetFont( &font );
 
 		return 0;
 	}
