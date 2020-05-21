@@ -1,3 +1,5 @@
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
 #include <afxwin.h>
 
 class MainFrame : public CFrameWnd
@@ -8,10 +10,19 @@ public:
 		Create( NULL, L"MFC App tutorial", WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX,
 			CRect( 100, 100, 500, 300 ) );
 	}
+	~MainFrame()
+	{
+		delete edit;
+		edit = nullptr;
+	}
 
 protected:
 	afx_msg int OnCreate( LPCREATESTRUCT lpCreateStruct );
 	DECLARE_MESSAGE_MAP()
+
+private:
+	CEdit* edit = nullptr;
+	CButton* button = nullptr;
 };
 
 class MFCTest : public CWinApp
@@ -40,6 +51,27 @@ int MainFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 	if ( CFrameWnd::OnCreate( lpCreateStruct ) == 0 )
 	{
 		MessageBox( L"The Window has been created!" );
+
+		edit = new CEdit();
+		edit->Create( WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_NOHIDESEL,
+			CRect( 10, 10, 75, 50 ), this, 1001 );
+		edit->SetFocus();
+
+		button = new CButton();
+		button->Create( L"Aceptar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
+			CRect( 10, 70, 75, 94 ), this, 1002 );
+
+		//// Get the system message box font
+		//NONCLIENTMETRICS ncm;
+		//ncm.cbSize = sizeof( ncm );
+		//SystemParametersInfo( SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0 );
+		//LOGFONT lfDlgFont = ncm.lfMessageFont;
+		//CFont font;
+		//font.CreateFontIndirect( &lfDlgFont );
+
+		//edit->SetFont( &font );
+		//button->SetFont( &font );
+
 		return 0;
 	}
 
