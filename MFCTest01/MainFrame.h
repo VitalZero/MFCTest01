@@ -8,11 +8,12 @@ class MainFrame : public CFrameWnd
 public:
 	MainFrame()
 	{
-		Create( NULL, L"MFC App tutorial", WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX,
+		Create( NULL, "MFC App tutorial", WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX,
 			CRect( 100, 100, 500, 300 ) );
 
 		requis.Insertar( 22334, 4567800, "01/05/2020" );
 		requis.Insertar( 21345, 1672000, "01/04/2020", 16 );
+		requis.Insertar( 22386, 1725996, "20/05/2020" );
 	}
 
 protected:

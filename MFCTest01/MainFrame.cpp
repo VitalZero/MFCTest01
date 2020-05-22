@@ -11,21 +11,21 @@ int MainFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 
 	if ( CFrameWnd::OnCreate( lpCreateStruct ) == 0 )
 	{
-		MessageBox( L"The Window has been created!" );
+		MessageBox( "The Window has been created!" );
 
 		edit = new CEdit;
 		edit->Create( WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_NOHIDESEL,
-			CRect( 10, 10, 110, 34 ), this, 1001 );
+			CRect( 10, 10, 110, 33 ), this, 1001 );
 
 		edit->SetFocus();
 
 		btnGuardar = new CButton;
-		btnGuardar->Create( L"Guardar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
-			CRect( 10, 70, 75, 93 ), this, 1002 );
+		btnGuardar->Create( "Guardar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
+			CRect( 10, 70, 85, 93 ), this, 1002 );
 
 		btnCargar = new CButton;
-		btnCargar->Create( L"Cargar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_DEFPUSHBUTTON,
-			CRect( 85, 70, 160, 93 ), this, 1003 );
+		btnCargar->Create( "Cargar", WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON,
+			CRect( 92, 70, 167, 93 ), this, 1003 );
 
 		// Get the system message box font
 		NONCLIENTMETRICS ncm;
@@ -49,7 +49,7 @@ void MainFrame::OnGuardarClick()
 	requis.Guardar();
 	//requis.Cargar();
 
-	MessageBox( L"Hola mundo!" );
+	MessageBox( "Hola mundo!" );
 }
 
 void MainFrame::OnCargarClick()
@@ -57,7 +57,7 @@ void MainFrame::OnCargarClick()
 	ColeccionRequis rs;
 	rs.Cargar();
 	CString str;
-	str.Format( L"Numero de requi: %d", rs.Lista().GetAt( 0 ).NumRequi() );
+	str.Format( "Numero de requi: %d", rs.Lista().GetAt( 0 ).NumRequi() );
 
 	MessageBox( str );
 }

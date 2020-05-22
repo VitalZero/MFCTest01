@@ -19,7 +19,7 @@ void Encabezado::Serialize( CArchive & ar )
 		ar >> tmpFirma;
 
 		if ( tmpFirma != firma )
-			throw CString( L"Tipo de archivo diferente" );
+			throw CString( "Tipo de archivo diferente" );
 		
 		char tmpVMaj;
 		char tmpVMin;
@@ -27,7 +27,7 @@ void Encabezado::Serialize( CArchive & ar )
 		ar >> tmpVMaj >> tmpVMin;
 		
 		if ( tmpVMaj != versionMayor || tmpVMin != versionMenor )
-			throw CString( L"Versión inválida" );
+			throw CString( "Versión inválida" );
 		
 		ar >> numRequis;
 	}

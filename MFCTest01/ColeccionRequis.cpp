@@ -13,7 +13,7 @@ void ColeccionRequis::Insertar(unsigned int requi, unsigned long monto,
 void ColeccionRequis::Guardar()
 {
 	CFile file;
-	file.Open( L"datos.txt", CFile::modeCreate | CFile::modeWrite );
+	file.Open( "datos.txt", CFile::modeCreate | CFile::modeWrite );
 	CArchive ar( &file, CArchive::store );
 
 	int numRequis = requisiciones.GetSize();
@@ -35,7 +35,7 @@ void ColeccionRequis::Cargar()
 	requisiciones.RemoveAll();
 
 	CFile file;
-	file.Open( L"datos.txt", CFile::modeRead );
+	file.Open( "datos.txt", CFile::modeRead );
 	CArchive ar( &file, CArchive::load );
 
 	Encabezado encabezado( 0 );
@@ -93,7 +93,7 @@ bool ColeccionRequis::LeerEncabezado( CArchive& ar, Encabezado& encabezado )
 	}
 	catch ( CString& e )
 	{
-		CString errorMsg = L"Error al cargar el archivo: ";
+		CString errorMsg = "Error al cargar el archivo: ";
 		
 		return false;
 	}
