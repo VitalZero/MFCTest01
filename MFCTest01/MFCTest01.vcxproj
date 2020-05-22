@@ -147,7 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColeccionRequis.cpp" />
+    <ClCompile Include="Encabezado.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MFCTest01.cpp" />
+    <ClCompile Include="Requisicion.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ColeccionRequis.h" />
+    <ClInclude Include="Encabezado.h" />
+    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="Requisicion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
