@@ -25,10 +25,10 @@ Requi & Requi::operator=( const Requi & otro )
 IMPLEMENT_SERIAL( Requi, CObject, 0 )
 
 Requi::Requi( unsigned int requi, unsigned long monto, const CString& fechaOrigen,
-	unsigned short int impuesto = 16 )
+	Documentos documento, unsigned short int impuesto )
 	:
-	requi(requi), monto(monto), fechaOrigen(fechaOrigen), estado( Estatus::Libre ),
-	impuesto( impuesto ), fechaSolicitud("0"), fechaAutorizado("0")
+	requi(requi), monto(monto), fechaOrigen(fechaOrigen), documento( Documentos::Nada ),
+	estado( Estatus::Libre ),	impuesto( impuesto ), fechaSolicitud("0"), fechaAutorizado("0")
 {}
 
 void Requi::Serialize( CArchive& ar )
@@ -37,12 +37,12 @@ void Requi::Serialize( CArchive& ar )
 
 	if ( ar.IsStoring() )
 	{
-		ar << requi << monto << estado << impuesto << fechaOrigen
+		ar << requi << monto << estado << documento << impuesto << fechaOrigen
 			<< fechaSolicitud << fechaAutorizado;
 	}
 	else
 	{
-		ar >> requi >> monto >> estado >> impuesto >> fechaOrigen
+		ar >> requi >> monto >> estado >> documento >> impuesto >> fechaOrigen
 			>> fechaSolicitud >> fechaAutorizado;
 	}
 }

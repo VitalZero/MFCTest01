@@ -3,9 +3,9 @@
 #include <exception>
 
 void ColeccionRequis::Insertar(unsigned int requi, unsigned long monto, 
-	const CString& fechaOrigen, unsigned short int impuesto )
+	const CString& fechaOrigen, Requi::Documentos documento, unsigned short int impuesto )
 {
-	Requi r( requi, monto, fechaOrigen, impuesto );
+	Requi r( requi, monto, fechaOrigen, documento, impuesto );
 
 	requisiciones.Add( r );
 }

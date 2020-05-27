@@ -8,8 +8,9 @@ using Requisiciones = CArray<Requi, Requi>;
 class ColeccionRequis
 {
 public:
-	void Insertar( unsigned int requi, unsigned long monto, const CString& fechaOrigen,
-		unsigned short int impuesto = 16);
+	void Insertar( unsigned int requi, unsigned long monto,
+		const CString& fechaOrigen, Requi::Documentos documento = Requi::Documentos::Nada, 
+		unsigned short int impuesto  = 16);
 	void Guardar();
 	void Cargar();
 	const Requisiciones& Lista() const { return requisiciones; }

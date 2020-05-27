@@ -8,14 +8,18 @@ public:
 	{
 		Libre = 'L', Solicitado = 'S', Autorizado = 'A', Rechazado = 'R', Cancelado = 'C'
 	};
+	enum Documentos : char
+	{
+		Cotizacion = 'C', Factura = 'F', Nada = 'N'
+	};
 
 public:
 	Requi() {}
 	Requi( const Requi& otro );
 	Requi& operator=( const Requi& otro );
 	Requi(unsigned int requi, unsigned long monto, const CString& fechaOrigen, 
-		unsigned short int impuesto );
-	~Requi() {}
+		Documentos documento = Documentos::Nada, unsigned short int impuesto = 16);
+	~Requi() = default;
 
 public:
 	void Serialize( CArchive& ar );
@@ -30,6 +34,7 @@ public:
 private:
 	unsigned int requi;
   char estado;
+	char documento;
 	CString fechaOrigen;
 	CString fechaSolicitud;
 	CString fechaAutorizado;
