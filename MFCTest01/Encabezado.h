@@ -15,7 +15,6 @@ public:
 
 private:
 	unsigned int numRequis;
-	static constexpr char versionMayor = 1;
-	static constexpr char versionMenor = 0;
+	static constexpr char version = 1;
 	const CString firma = "VZ";
 };

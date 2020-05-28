@@ -11,7 +11,7 @@ void Encabezado::Serialize( CArchive & ar )
 {
 	if ( ar.IsStoring() )
 	{
-		ar << firma << versionMayor << versionMenor << numRequis;
+		ar << firma << version << numRequis;
 	}
 	else
 	{
@@ -21,12 +21,11 @@ void Encabezado::Serialize( CArchive & ar )
 		if ( tmpFirma != firma )
 			throw CString( "Tipo de archivo diferente" );
 		
-		char tmpVMaj;
-		char tmpVMin;
+		char tmpVersion;
 
-		ar >> tmpVMaj >> tmpVMin;
+		ar >> tmpVersion;
 		
-		if ( tmpVMaj != versionMayor || tmpVMin != versionMenor )
+		if ( tmpVersion != version )
 			throw CString( "Versión inválida" );
 		
 		ar >> numRequis;

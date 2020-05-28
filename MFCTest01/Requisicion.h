@@ -18,7 +18,8 @@ public:
 	Requi( const Requi& otro );
 	Requi& operator=( const Requi& otro );
 	Requi(unsigned int requi, unsigned long monto, const CString& fechaOrigen, 
-		Documentos documento = Documentos::Nada, unsigned short int impuesto = 16);
+		Documentos documento = Documentos::Nada, unsigned short int impuesto = 16,
+		const CString& fechaSolicitud = "0", const CString& fechaAutorizado = "0");
 	~Requi() = default;
 
 public:
@@ -32,6 +33,7 @@ public:
 	DECLARE_SERIAL( Requi )
 
 private:
+	static constexpr char version = 1;
 	unsigned int requi;
   char estado;
 	char documento;

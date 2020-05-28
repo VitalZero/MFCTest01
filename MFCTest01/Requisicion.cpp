@@ -7,7 +7,6 @@ Requi::Requi( const Requi & otro )
 
 Requi & Requi::operator=( const Requi & otro )
 {
-	// TODO: insertar una instrucción return aquí
 	if ( this != &otro )
 	{
 		requi = otro.requi;
@@ -25,10 +24,12 @@ Requi & Requi::operator=( const Requi & otro )
 IMPLEMENT_SERIAL( Requi, CObject, 0 )
 
 Requi::Requi( unsigned int requi, unsigned long monto, const CString& fechaOrigen,
-	Documentos documento, unsigned short int impuesto )
+	Documentos documento, unsigned short int impuesto,
+	const CString& fechaSolicitud, const CString& fechaAutorizado )
 	:
 	requi(requi), monto(monto), fechaOrigen(fechaOrigen), documento( Documentos::Nada ),
-	estado( Estatus::Libre ),	impuesto( impuesto ), fechaSolicitud("0"), fechaAutorizado("0")
+	estado( Estatus::Libre ),	impuesto( impuesto ), fechaSolicitud( fechaSolicitud ), 
+	fechaAutorizado( fechaAutorizado )
 {}
 
 void Requi::Serialize( CArchive& ar )
@@ -37,11 +38,18 @@ void Requi::Serialize( CArchive& ar )
 
 	if ( ar.IsStoring() )
 	{
-		ar << requi << monto << estado << documento << impuesto << fechaOrigen
+		ar << version << requi << monto << estado << documento << impuesto << fechaOrigen
 			<< fechaSolicitud << fechaAutorizado;
 	}
 	else
 	{
+		char tmpVersion;
+
+		ar >> tmpVersion;
+
+		if ( tmpVersion != version )
+			throw CString( "Version de requisicion invalida." );
+
 		ar >> requi >> monto >> estado >> documento >> impuesto >> fechaOrigen
 			>> fechaSolicitud >> fechaAutorizado;
 	}
