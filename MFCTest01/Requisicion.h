@@ -26,10 +26,10 @@ public:
 	void Serialize( CArchive& ar );
 	void Solicitar( const CString& fechaSolicitud );
 	void Autorizar( const CString& fechaAutorizado );
-	unsigned int NumRequi() const
-	{
-		return requi;
-	}
+	unsigned int NumRequi() const	{ return requi;	}
+	unsigned long Monto() const { return monto; }
+	const CString& FechaOrigen() const { return fechaOrigen; }
+	unsigned short int TasaIVA() const { return impuesto;  }
 	DECLARE_SERIAL( Requi )
 
 private:

@@ -14,8 +14,6 @@ int MainFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 		//MessageBox( "The Window has been created!" );
 		CreateListView();
 		CreateControls();
-	
-		listView->InsertItem( 0, "Hola mundo!", 0 );
 
 		return 0;
 	}
@@ -25,17 +23,22 @@ int MainFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
 void MainFrame::OnGuardarClick()
 {
 	requis.Guardar();
-	//requis.Cargar();
 
-	MessageBox( "Hola mundo!" );
+	MessageBox( "Se guardaron los datos" );
 }
 
 void MainFrame::OnCargarClick()
 {
 	ColeccionRequis rs;
 	rs.Cargar();
-	CString str;
-	str.Format( "Numero de requi: %d", rs.Lista().GetAt( 0 ).NumRequi() );
+	int sz = rs.Lista().GetSize();
+
+	CString str( "Requisiciones:\n" );
+
+	for ( int i = 0; i < sz; ++i )
+	{
+		str.AppendFormat( "Numero de requi: %d\n", rs.Lista().GetAt( i ).NumRequi() );
+	}
 
 	MessageBox( str );
 }
@@ -75,8 +78,33 @@ void MainFrame::CreateListView()
 	listView->Create( LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP,
 		CRect( 10, 10, 500, 200 ), this, 1004 );
 	listView->SetExtendedStyle( LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT );
-	listView->InsertColumn( 1, "Requisicion", 0, 80, 0 );
-	listView->InsertColumn( 2, "Monto", 0, 100, 1 );
-	listView->InsertColumn( 2, "Fecha Origen", 0, 100, 2 );
-	listView->InsertColumn( 2, "IVA", 0, 50, 3 );
+	listView->InsertColumn( 0, "Requisicion", 0, 80, 0 );
+	listView->InsertColumn( 1, "Monto", 0, 80, 1 );
+	listView->InsertColumn( 2, "Fecha Origen", 0, 90, 2 );
+	listView->InsertColumn( 3, "IVA", 0, 40, 3 );
+
+	ColeccionRequis rs;
+	rs.Cargar();
+	int sz = rs.Lista().GetSize();
+
+	CString str;
+
+	for ( int i = 0; i < sz; ++i )
+	{
+		str.Format( "%d", rs.Lista().GetAt( i ).NumRequi() );
+		listView->InsertItem( 0, str.GetBuffer() );
+
+		str.Format( "%d", rs.Lista().GetAt( i ).Monto() );
+		str.Insert( str.GetLength() - 2, "." );
+		listView->SetItemText( 0, 1, str.GetBuffer() );
+
+		str = rs.Lista().GetAt( i ).FechaOrigen();
+		listView->SetItemText( 0, 2, str.GetBuffer() );
+
+		str.Format( "%d", rs.Lista().GetAt( i ).TasaIVA() );
+		listView->SetItemText( 0, 3, str.GetBuffer() );
+
+		//str.AppendFormat( "Numero de requi: %d\n", rs.Lista().GetAt( i ).NumRequi() );
+	}
+
 }

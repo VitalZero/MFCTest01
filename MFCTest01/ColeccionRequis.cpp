@@ -36,6 +36,7 @@ void ColeccionRequis::Cargar()
 
 	CFile file;
 	file.Open( "datos.txt", CFile::modeRead );
+
 	CArchive ar( &file, CArchive::load );
 
 	Encabezado encabezado( 0 );
